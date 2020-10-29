@@ -17,7 +17,7 @@ class Redash(Flask):
         )
         super(Redash, self).__init__(__name__, *args, **kwargs)
         # Make sure we get the right referral address even behind proxies like nginx.
-        self.wsgi_app = ProxyFix(self.wsgi_app, x_for=settings.PROXIES_COUNT, x_host=1)
+        self.wsgi_app = ProxyFix(self.wsgi_app, x_for=1, x_host=1)
         # Configure Redash using our settings
         self.config.from_object("redash.settings")
 
@@ -36,14 +36,8 @@ def create_app():
     from .handlers.webpack import configure_webpack
     from .metrics import request as request_metrics
     from .models import db, users
-    from .utils import sentry
-    from .version_check import reset_new_version_status
 
-    sentry.init()
     app = Redash()
-
-    # Check and update the cached version for use by the client
-    app.before_first_request(reset_new_version_status)
 
     security.init_app(app)
     request_metrics.init_app(app)

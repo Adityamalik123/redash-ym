@@ -15,7 +15,6 @@ from redash.tasks import (
     refresh_schemas,
     cleanup_query_results,
     purge_failed_jobs,
-    version_check,
     send_aggregated_errors,
     Queue
 )
@@ -76,15 +75,11 @@ def periodic_job_definitions():
             "interval": timedelta(minutes=settings.SEND_FAILURE_EMAIL_INTERVAL),
         },
     ]
-
-    if settings.VERSION_CHECK:
-        jobs.append({"func": version_check, "interval": timedelta(days=1)})
-
     if settings.QUERY_RESULTS_CLEANUP_ENABLED:
         jobs.append({"func": cleanup_query_results, "interval": timedelta(minutes=5)})
 
     # Add your own custom periodic jobs in your dynamic_settings module.
-    jobs.extend(settings.dynamic_settings.periodic_jobs() or [])
+    # jobs.extend(settings.dynamic_settings.periodic_jobs() or [])
 
     # Add periodic jobs that are shipped as part of Redash extensions
     extensions.load_periodic_jobs(logger)

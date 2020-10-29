@@ -15,7 +15,6 @@ from redash.authentication.account import (
 )
 from redash.handlers import routes
 from redash.handlers.base import json_response, org_scoped_rule
-from redash.version_check import get_latest_version
 from sqlalchemy.orm.exc import NoResultFound
 
 logger = logging.getLogger(__name__)
@@ -268,7 +267,6 @@ def number_format_config():
 def client_config():
     if not current_user.is_api_user() and current_user.is_authenticated:
         client_config = {
-            "newVersionAvailable": bool(get_latest_version()),
             "version": __version__,
         }
     else:

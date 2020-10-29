@@ -24,7 +24,6 @@ from redash.destinations import (
 )
 from redash.metrics import database  # noqa: F401
 from redash.query_runner import (
-    with_ssh_tunnel,
     get_configuration_schema_for_query_runner_type,
     get_query_runner,
     TYPE_BOOLEAN,
@@ -36,8 +35,7 @@ from redash.utils import (
     json_dumps,
     json_loads,
     mustache_render,
-    base_url,
-    sentry,
+    base_url
 )
 from redash.utils.configuration import ConfigurationContainer
 from redash.models.parameterized_query import ParameterizedQuery
@@ -261,10 +259,6 @@ class DataSource(BelongsToOrgMixin, db.Model):
     @property
     def query_runner(self):
         query_runner = get_query_runner(self.type, self.options)
-
-        if self.uses_ssh_tunnel:
-            query_runner = with_ssh_tunnel(query_runner, self.options.get("ssh_tunnel"))
-
         return query_runner
 
     @classmethod
@@ -678,9 +672,6 @@ class Query(ChangeTrackingMixin, TimestampMixin, BelongsToOrgMixin, db.Model):
                     % (query.id, repr(e))
                 )
                 logging.info(message)
-                sentry.capture_exception(
-                    type(e)(message).with_traceback(e.__traceback__)
-                )
 
         return list(outdated_queries.values())
 

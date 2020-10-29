@@ -7,7 +7,6 @@ from rq.registry import FailedJobRegistry
 from rq.job import Job
 from redash import mail, models, settings, rq_redis_connection
 from redash.models import users
-from redash.version_check import run_version_check
 from redash.worker import job, get_job_logger
 from redash.tasks.worker import Queue
 from redash.query_runner import NotSupported
@@ -32,10 +31,6 @@ def record_event(raw_event):
                 logger.error("Failed posting to %s: %s", hook, response.content)
         except Exception:
             logger.exception("Failed posting to %s", hook)
-
-
-def version_check():
-    run_version_check()
 
 
 @job("default")

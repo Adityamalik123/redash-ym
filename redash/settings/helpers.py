@@ -29,7 +29,6 @@ def parse_boolean(s):
     else:
         raise ValueError("Invalid boolean value %r" % s)
 
-
 def int_or_none(value):
     if value is None:
         return value

@@ -2,7 +2,7 @@ import logging
 import time
 
 from rq.timeouts import JobTimeoutException
-from redash import models, redis_connection, settings, statsd_client
+from redash import models, redis_connection, settings
 from redash.models.parameterized_query import (
     InvalidParameterError,
     QueryDetachedFromDataSourceError,
@@ -145,19 +145,16 @@ def refresh_schema(data_source_id):
             ds.id,
             time.time() - start_time,
         )
-        statsd_client.incr("refresh_schema.success")
     except JobTimeoutException:
         logger.info(
             u"task=refresh_schema state=timeout ds_id=%s runtime=%.2f",
             ds.id,
             time.time() - start_time,
         )
-        statsd_client.incr("refresh_schema.timeout")
     except Exception:
         logger.warning(
             u"Failed refreshing schema for the data source: %s", ds.name, exc_info=1
         )
-        statsd_client.incr("refresh_schema.error")
         logger.info(
             u"task=refresh_schema state=failed ds_id=%s runtime=%.2f",
             ds.id,

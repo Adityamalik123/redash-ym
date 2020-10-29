@@ -1,8 +1,6 @@
 import errno
 import os
 import signal
-import time
-from redash import statsd_client
 from rq import Worker as BaseWorker, Queue as BaseQueue, get_current_job
 from rq.utils import utcnow
 from rq.timeouts import UnixSignalDeathPenalty, HorseMonitorTimeoutException
@@ -30,7 +28,6 @@ class StatsdRecordingQueue(BaseQueue):
 
     def enqueue_job(self, *args, **kwargs):
         job = super().enqueue_job(*args, **kwargs)
-        statsd_client.incr("rq.jobs.created.{}".format(self.name))
         return job
 
 
@@ -48,16 +45,10 @@ class StatsdRecordingWorker(BaseWorker):
     """
 
     def execute_job(self, job, queue):
-        statsd_client.incr("rq.jobs.running.{}".format(queue.name))
-        statsd_client.incr("rq.jobs.started.{}".format(queue.name))
         try:
             super().execute_job(job, queue)
         finally:
-            statsd_client.decr("rq.jobs.running.{}".format(queue.name))
-            if job.get_status() == JobStatus.FINISHED:
-                statsd_client.incr("rq.jobs.finished.{}".format(queue.name))
-            else:
-                statsd_client.incr("rq.jobs.failed.{}".format(queue.name))
+            print("rq.jobs.running")
 
 
 class HardLimitingWorker(BaseWorker):

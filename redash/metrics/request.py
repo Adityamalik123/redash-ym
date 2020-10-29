@@ -4,8 +4,6 @@ from collections import namedtuple
 
 from flask import g, request
 
-from redash import statsd_client
-
 metrics_logger = logging.getLogger("metrics")
 
 
@@ -33,10 +31,6 @@ def calculate_metrics(response):
         request_duration,
         queries_count,
         queries_duration,
-    )
-
-    statsd_client.timing(
-        "requests.{}.{}".format(endpoint, request.method.lower()), request_duration
     )
 
     return response

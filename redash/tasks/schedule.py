@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 from rq.job import Job
 from rq_scheduler import Scheduler
 
-from redash import extensions, settings, rq_redis_connection, statsd_client
+from redash import extensions, settings, rq_redis_connection
 from redash.tasks import (
     sync_user_details,
     refresh_queries,

@@ -3,7 +3,6 @@ import time
 
 from flask import g, has_request_context
 
-from redash import statsd_client
 from sqlalchemy.engine import Engine
 from sqlalchemy.event import listens_for
 from sqlalchemy.orm.util import _ORMJoin
@@ -48,7 +47,6 @@ def after_execute(conn, elt, multiparams, params, result):
 
     action = action.lower()
 
-    statsd_client.timing("db.{}.{}".format(name, action), duration)
     metrics_logger.debug("table=%s query=%s duration=%.2f", name, action, duration)
 
     if has_request_context():

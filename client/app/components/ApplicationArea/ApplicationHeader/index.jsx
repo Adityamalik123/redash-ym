@@ -142,12 +142,6 @@ function DesktopNavbar() {
                       <a href="destinations">Alert Destinations</a>
                     </Menu.Item>
                   )}
-                  {currentUser.hasPermission("super_admin") && <Menu.Divider />}
-                  {currentUser.hasPermission("super_admin") && (
-                    <Menu.Item key="status">
-                      <a href="admin/status">System Status</a>
-                    </Menu.Item>
-                  )}
                   <Menu.Divider />
                   <Menu.Item key="logout" onClick={() => Auth.logout()}>
                     Log out
@@ -224,11 +218,6 @@ function MobileNavbar() {
               {currentUser.isAdmin && (
                 <Menu.Item key="settings">
                   <a href="data_sources">Settings</a>
-                </Menu.Item>
-              )}
-              {currentUser.hasPermission("super_admin") && (
-                <Menu.Item key="status">
-                  <a href="admin/status">System Status</a>
                 </Menu.Item>
               )}
               {currentUser.hasPermission("super_admin") && <Menu.Divider />}

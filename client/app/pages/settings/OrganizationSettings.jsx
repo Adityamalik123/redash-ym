@@ -15,7 +15,6 @@ import LoadingState from "@/components/items-list/components/LoadingState";
 import { clientConfig } from "@/services/auth";
 import recordEvent from "@/services/recordEvent";
 import OrgSettings from "@/services/organizationSettings";
-import HelpTrigger from "@/components/HelpTrigger";
 import wrapSettingsTab from "@/components/SettingsWrapper";
 import DynamicComponent from "@/components/DynamicComponent";
 
@@ -142,7 +141,7 @@ class OrganizationSettings extends React.Component {
     return (
       <React.Fragment>
         <h3 className="m-t-0">
-          Authentication <HelpTrigger type="AUTHENTICATION_OPTIONS" />
+          Authentication
         </h3>
         <hr />
         {!settings.auth_password_login_enabled && (

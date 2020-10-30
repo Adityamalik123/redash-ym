@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import HelpTrigger from "@/components/HelpTrigger";
 import { Alert as AlertType } from "@/components/proptypes";
 
 import Form from "antd/lib/form";
@@ -81,9 +80,9 @@ export default class AlertNew extends React.Component {
                 </Button>
               </HorizontalFormItem>
             </Form>
-            <HelpTrigger className="f-13" type="ALERT_SETUP">
-              Setup Instructions <i className="fa fa-question-circle" />
-            </HelpTrigger>
+            {/*<HelpTrigger className="f-13" type="ALERT_SETUP">*/}
+            {/*  Setup Instructions <i className="fa fa-question-circle" />*/}
+            {/*</HelpTrigger>*/}
           </div>
         </div>
       </>

@@ -6,8 +6,6 @@ import Dropdown from "antd/lib/dropdown";
 import Icon from "antd/lib/icon";
 import Menu from "antd/lib/menu";
 
-import HelpTrigger from "@/components/HelpTrigger";
-
 export default function FavoritesDropdown({ fetch, urlTemplate }) {
   const [items, setItems] = useState();
   const [loading, setLoading] = useState(false);
@@ -44,7 +42,7 @@ export default function FavoritesDropdown({ fetch, urlTemplate }) {
           <span className="btn-favourite m-r-5">
             <i className="fa fa-star" />
           </span>
-          No favorites selected yet <HelpTrigger type="FAVORITES" />
+          No favorites selected yet
         </Menu.Item>
       ) : (
         items.map(item => (

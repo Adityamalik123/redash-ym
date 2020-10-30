@@ -16,7 +16,6 @@ import navigateTo from "@/components/ApplicationArea/navigateTo";
 import { currentUser, Auth, clientConfig } from "@/services/auth";
 import { Dashboard } from "@/services/dashboard";
 import { Query } from "@/services/query";
-import frontendVersion from "@/version.json";
 import logoUrl from "@/assets/images/redash_icon_small.png";
 
 import FavoritesDropdown from "./FavoritesDropdown";
@@ -153,23 +152,6 @@ function DesktopNavbar() {
                     Log out
                   </Menu.Item>
                   <Menu.Divider />
-                  <Menu.Item key="version" disabled>
-                    Version: {clientConfig.version}
-                    {frontendVersion !== clientConfig.version && ` (${frontendVersion.substring(0, 8)})`}
-                    {clientConfig.newVersionAvailable && currentUser.hasPermission("super_admin") && (
-                      <Tooltip title="Update Available" placement="rightTop">
-                        {" "}
-                        {/* eslint-disable react/jsx-no-target-blank */}
-                        <a
-                          href="https://version.redash.io/"
-                          className="update-available"
-                          target="_blank"
-                          rel="noopener">
-                          <i className="fa fa-arrow-circle-down" />
-                        </a>
-                      </Tooltip>
-                    )}
-                  </Menu.Item>
                 </Menu>
               }>
               <Button data-test="ProfileDropdown" className="profile-dropdown">

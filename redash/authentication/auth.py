@@ -1,35 +1,8 @@
 from functools import wraps
 from flask import g, request, Response
-from typing import List, Dict,Any
+from typing import List
 import requests
-import os
-import configparser
-import config
-
-configuration = {}
-environment = os.environ.get('ML_ENV','production')
-sso = ''
-if environment.lower() == 'production':
-    configuration = config.ProductionConfig()
-    sso = configuration.ML_SSO_URL
-elif environment.lower() == 'deployment':
-    configuration = configparser.ConfigParser()
-    configuration.read('/root/.config/configstore/ml.ini')
-    sso = configuration.get('CONFIG','ML_SSO_URL')
-
-
-def check_auth(username:str, password:str)->bool:
-    """This function is called to check if a username /
-    password combination is valid.
-    """
-    return username == 'admin' and password == 'c0mpl1cat3d'
-
-
-def authenticate():
-    """Sends a 401 response that enables basic auth"""
-    return Response('Could not verify your access level for that URL.\n You have to login with proper credentials', 401,
-                    {'WWW-Authenticate': 'Basic realm="Login Required"'})
-
+from redash import settings
 
 def user():
     def wrap(f):
@@ -41,7 +14,7 @@ def user():
             else:
                 return "Access denied"
 
-            url = sso + '/session'
+            url = settings.SSO_URL + '/session'
             headers = {'x-auth-token': token, 'x-auth-cookie': "true"}
             r = requests.get(url, headers=headers)
             g.user = r.json()["session"]
@@ -64,7 +37,7 @@ def bot(roles:List):
                 return Response(status=401)
             g.auth_token = token
 
-            url = sso+'/session'
+            url = settings.SSO_URL+'/session'
             headers = {'x-auth-token': token, 'x-auth-cookie': "true"}
             r = requests.get(url, headers=headers)
             if "session" not in r.json().keys():
@@ -84,6 +57,5 @@ def bot(roles:List):
                         break
 
             return f(*args, **kwargs)
-
         return decorated_function
     return wrap

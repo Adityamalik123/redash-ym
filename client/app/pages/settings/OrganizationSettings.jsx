@@ -75,73 +75,6 @@ class OrganizationSettings extends React.Component {
     );
   };
 
-  renderGoogleLoginOptions() {
-    const { formValues } = this.state;
-    return (
-      <React.Fragment>
-        <h4>Google Login</h4>
-        <Form.Item label="Allowed Google Apps Domains">
-          <Select
-            mode="tags"
-            value={formValues.auth_google_apps_domains}
-            onChange={value => this.handleChange("auth_google_apps_domains", value)}
-          />
-          {!isEmpty(formValues.auth_google_apps_domains) && (
-            <Alert
-              message={
-                <p>
-                  Any user registered with a <strong>{join(formValues.auth_google_apps_domains, ", ")}</strong> Google
-                  Apps account will be able to login. If they don{"'"}t have an existing user, a new user will be
-                  created and join the <strong>Default</strong> group.
-                </p>
-              }
-              className="m-t-15"
-            />
-          )}
-        </Form.Item>
-      </React.Fragment>
-    );
-  }
-
-  renderSAMLOptions() {
-    const { formValues } = this.state;
-    return (
-      <React.Fragment>
-        <h4>SAML</h4>
-        <Form.Item>
-          <Checkbox
-            name="auth_saml_enabled"
-            checked={formValues.auth_saml_enabled}
-            onChange={e => this.handleChange("auth_saml_enabled", e.target.checked)}>
-            SAML Enabled
-          </Checkbox>
-        </Form.Item>
-        {formValues.auth_saml_enabled && (
-          <div>
-            <Form.Item label="SAML Metadata URL">
-              <Input
-                value={formValues.auth_saml_metadata_url}
-                onChange={e => this.handleChange("auth_saml_metadata_url", e.target.value)}
-              />
-            </Form.Item>
-            <Form.Item label="SAML Entity ID">
-              <Input
-                value={formValues.auth_saml_entity_id}
-                onChange={e => this.handleChange("auth_saml_entity_id", e.target.value)}
-              />
-            </Form.Item>
-            <Form.Item label="SAML NameID Format">
-              <Input
-                value={formValues.auth_saml_nameid_format}
-                onChange={e => this.handleChange("auth_saml_nameid_format", e.target.value)}
-              />
-            </Form.Item>
-          </div>
-        )}
-      </React.Fragment>
-    );
-  }
-
   renderGeneralSettings() {
     const { formValues } = this.state;
     return (
@@ -200,21 +133,6 @@ class OrganizationSettings extends React.Component {
             Enable multi-byte (Chinese, Japanese, and Korean) search for query names and descriptions (slower)
           </Checkbox>
         </Form.Item>
-        <DynamicComponent name="BeaconConsentSetting">
-          <Form.Item
-            label={
-              <>
-                Anonymous Usage Data Sharing <HelpTrigger type="USAGE_DATA_SHARING" />
-              </>
-            }>
-            <Checkbox
-              name="beacon_consent"
-              checked={formValues.beacon_consent}
-              onChange={e => this.handleChange("beacon_consent", e.target.checked)}>
-              Help Redash improve by automatically sending anonymous usage data
-            </Checkbox>
-          </Form.Item>
-        </DynamicComponent>
       </React.Fragment>
     );
   }
@@ -251,8 +169,6 @@ class OrganizationSettings extends React.Component {
             </Tooltip>
           </Checkbox>
         </Form.Item>
-        {clientConfig.googleLoginEnabled && this.renderGoogleLoginOptions()}
-        {this.renderSAMLOptions()}
       </React.Fragment>
     );
   }

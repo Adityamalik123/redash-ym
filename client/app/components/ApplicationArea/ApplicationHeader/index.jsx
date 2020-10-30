@@ -115,7 +115,6 @@ function DesktopNavbar() {
                   <Menu.Item key="profile">
                     <a href="users/me">Edit Profile</a>
                   </Menu.Item>
-                  {currentUser.hasPermission("super_admin") && <Menu.Divider />}
                   {currentUser.isAdmin && (
                     <Menu.Item key="datasources">
                       <a href="data_sources">Data Sources</a>
@@ -139,12 +138,6 @@ function DesktopNavbar() {
                   {currentUser.isAdmin && (
                     <Menu.Item key="destinations">
                       <a href="destinations">Alert Destinations</a>
-                    </Menu.Item>
-                  )}
-                  {currentUser.hasPermission("super_admin") && <Menu.Divider />}
-                  {currentUser.hasPermission("super_admin") && (
-                    <Menu.Item key="status">
-                      <a href="admin/status">System Status</a>
                     </Menu.Item>
                   )}
                   <Menu.Divider />
@@ -207,12 +200,6 @@ function MobileNavbar() {
                   <a href="data_sources">Settings</a>
                 </Menu.Item>
               )}
-              {currentUser.hasPermission("super_admin") && (
-                <Menu.Item key="status">
-                  <a href="admin/status">System Status</a>
-                </Menu.Item>
-              )}
-              {currentUser.hasPermission("super_admin") && <Menu.Divider />}
               <Menu.Item key="help">
                 {/* eslint-disable-next-line react/jsx-no-target-blank */}
                 <a href="https://redash.io/help" target="_blank" rel="noopener">

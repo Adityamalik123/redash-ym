@@ -87,10 +87,6 @@ def require_admin(fn):
     return require_permission("admin")(fn)
 
 
-def require_super_admin(fn):
-    return require_permission("super_admin")(fn)
-
-
 def has_permission_or_owner(permission, object_owner_id):
     return int(object_owner_id) == current_user.id or current_user.has_permission(
         permission

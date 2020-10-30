@@ -151,7 +151,6 @@ function DesktopNavbar() {
                   <Menu.Item key="logout" onClick={() => Auth.logout()}>
                     Log out
                   </Menu.Item>
-                  <Menu.Divider />
                 </Menu>
               }>
               <Button data-test="ProfileDropdown" className="profile-dropdown">

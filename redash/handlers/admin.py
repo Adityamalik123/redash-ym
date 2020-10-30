@@ -5,15 +5,12 @@ from redash import models, redis_connection
 from redash.authentication import current_org
 from redash.handlers import routes
 from redash.handlers.base import json_response, record_event
-from redash.permissions import require_super_admin
 from redash.serializers import QuerySerializer
 from redash.utils import json_loads
 from redash.monitor import rq_status
 
 
-@routes.route("/api/admin/queries/outdated", methods=["GET"])
-@require_super_admin
-@login_required
+@routes.route("/api/internal/admin/queries/outdated", methods=["GET"])
 def outdated_queries():
     manager_status = redis_connection.hgetall("redash:status")
     query_ids = json_loads(manager_status.get("query_ids", "[]"))
@@ -41,9 +38,7 @@ def outdated_queries():
     return json_response(response)
 
 
-@routes.route("/api/admin/queries/rq_status", methods=["GET"])
-@require_super_admin
-@login_required
+@routes.route("/api/internal/admin/queries/rq_status", methods=["GET"])
 def queries_rq_status():
     record_event(
         current_org,

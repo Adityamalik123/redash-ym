@@ -116,7 +116,6 @@ function DesktopNavbar() {
                   <Menu.Item key="profile">
                     <a href="users/me">Edit Profile</a>
                   </Menu.Item>
-                  {currentUser.hasPermission("super_admin") && <Menu.Divider />}
                   {currentUser.isAdmin && (
                     <Menu.Item key="datasources">
                       <a href="data_sources">Data Sources</a>
@@ -145,24 +144,6 @@ function DesktopNavbar() {
                   <Menu.Divider />
                   <Menu.Item key="logout" onClick={() => Auth.logout()}>
                     Log out
-                  </Menu.Item>
-                  <Menu.Divider />
-                  <Menu.Item key="version" disabled>
-                    Version: {clientConfig.version}
-                    {frontendVersion !== clientConfig.version && ` (${frontendVersion.substring(0, 8)})`}
-                    {clientConfig.newVersionAvailable && currentUser.hasPermission("super_admin") && (
-                      <Tooltip title="Update Available" placement="rightTop">
-                        {" "}
-                        {/* eslint-disable react/jsx-no-target-blank */}
-                        <a
-                          href="https://version.redash.io/"
-                          className="update-available"
-                          target="_blank"
-                          rel="noopener">
-                          <i className="fa fa-arrow-circle-down" />
-                        </a>
-                      </Tooltip>
-                    )}
                   </Menu.Item>
                 </Menu>
               }>
@@ -220,7 +201,6 @@ function MobileNavbar() {
                   <a href="data_sources">Settings</a>
                 </Menu.Item>
               )}
-              {currentUser.hasPermission("super_admin") && <Menu.Divider />}
               <Menu.Item key="help">
                 {/* eslint-disable-next-line react/jsx-no-target-blank */}
                 <a href="https://redash.io/help" target="_blank" rel="noopener">

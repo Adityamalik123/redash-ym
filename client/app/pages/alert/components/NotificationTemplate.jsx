@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { head, isEmpty, isNull, isUndefined } from "lodash";
 import Mustache from "mustache";
 
-import HelpTrigger from "@/components/HelpTrigger";
 import { Alert as AlertType, Query as QueryType } from "@/components/proptypes";
 
 import Input from "antd/lib/input";
@@ -93,9 +92,9 @@ function NotificationTemplate({ alert, query, columnNames, resultValues, subject
             disabled={showPreview}
             data-test="CustomBody"
           />
-          <HelpTrigger type="ALERT_NOTIF_TEMPLATE_GUIDE" className="f-13">
-            <i className="fa fa-question-circle" /> Formatting guide
-          </HelpTrigger>
+          {/*<HelpTrigger type="ALERT_NOTIF_TEMPLATE_GUIDE" className="f-13">*/}
+          {/*  <i className="fa fa-question-circle" /> Formatting guide*/}
+          {/*</HelpTrigger>*/}
         </div>
       )}
     </div>

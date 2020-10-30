@@ -3,7 +3,6 @@ import Card from "antd/lib/card";
 import Button from "antd/lib/button";
 import Typography from "antd/lib/typography";
 import { clientConfig } from "@/services/auth";
-import HelpTrigger from "@/components/HelpTrigger";
 import DynamicComponent from "@/components/DynamicComponent";
 import OrgSettings from "@/services/organizationSettings";
 
@@ -43,7 +42,6 @@ function BeaconConsent() {
           title={
             <>
               Would you be ok with sharing anonymous usage data with the Redash team?{" "}
-              <HelpTrigger type="USAGE_DATA_SHARING" />
             </>
           }
           bordered={false}>

@@ -4,7 +4,6 @@ import cx from "classnames";
 import { clientConfig, currentUser } from "@/services/auth";
 import Tooltip from "antd/lib/tooltip";
 import Alert from "antd/lib/alert";
-import HelpTrigger from "@/components/HelpTrigger";
 
 export default function EmailSettingsWarning({ featureName, className, mode, adminOnly }) {
   if (!clientConfig.mailSettingsMissing) {
@@ -18,7 +17,6 @@ export default function EmailSettingsWarning({ featureName, className, mode, adm
   const message = (
     <span>
       Your mail server isn&apos;t configured correctly, and is needed for {featureName} to work.{" "}
-      <HelpTrigger type="MAIL_CONFIG" className="f-inherit" />
     </span>
   );
 

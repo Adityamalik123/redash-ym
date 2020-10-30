@@ -17,7 +17,6 @@ import Tooltip from "antd/lib/tooltip";
 import ParameterValueInput from "@/components/ParameterValueInput";
 import { ParameterMappingType } from "@/services/widget";
 import { Parameter, cloneParameter } from "@/services/parameters";
-import HelpTrigger from "@/components/HelpTrigger";
 
 import "./ParameterMappingInput.less";
 
@@ -327,7 +326,7 @@ class MappingEditor extends React.Component {
     return (
       <div className="parameter-mapping-editor" data-test="EditParamMappingPopover">
         <header>
-          Edit Source and Value <HelpTrigger type="VALUE_SOURCE_OPTIONS" />
+          Edit Source and Value
         </header>
         <ParameterMappingInput
           mapping={mapping}

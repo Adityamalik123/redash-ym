@@ -10,7 +10,6 @@ import Tag from "antd/lib/tag";
 import Tooltip from "antd/lib/tooltip";
 import { wrap as wrapDialog, DialogPropType } from "@/components/DialogWrapper";
 import { toHuman } from "@/lib/utils";
-import HelpTrigger from "@/components/HelpTrigger";
 import { UserPreviewCard } from "@/components/PreviewCard";
 import notification from "@/services/notification";
 import User from "@/services/user";
@@ -66,7 +65,6 @@ function PermissionsEditorDialogHeader({ context }) {
       Manage Permissions
       <div className="modal-header-desc">
         {`Editing this ${context} is enabled for the users in this list and for admins. `}
-        <HelpTrigger type="MANAGE_PERMISSIONS" />
       </div>
     </>
   );

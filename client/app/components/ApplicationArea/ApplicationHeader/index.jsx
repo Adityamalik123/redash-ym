@@ -81,11 +81,11 @@ function DesktopNavbar() {
           </Dropdown>
         )}
       </div>
-      <div className="header-logo">
-        <a href="./">
-          <img src={logoUrl} alt="Redash" />
-        </a>
-      </div>
+      {/*<div className="header-logo">*/}
+      {/*  <a href="./">*/}
+      {/*    <img src={logoUrl} alt="Redash" />*/}
+      {/*  </a>*/}
+      {/*</div>*/}
       <div>
         <Input.Search
           className="searchbar"
